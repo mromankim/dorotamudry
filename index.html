@@ -32,14 +32,22 @@
 			a { color: inherit; text-decoration: none; transition: color 0.3s; }
 			a:hover { color: var(--color-accent); }
 
-			/* Page loader */
-			.loading::before, .loading::after { content:''; position:fixed; z-index:1000; }
-			.loading::before { inset:0; background:var(--color-bg); }
-			.loading::after {
-				top:50%; left:50%; width:54px; height:54px; margin:-27px 0 0 -27px; border-radius:50%;
-				opacity:.35; background:var(--color-accent); animation:dLoader .7s linear infinite alternate forwards;
+			/* Page loader — cycling pink greeting */
+			.loader {
+				position: fixed; inset: 0; z-index: 1000;
+				display: flex; align-items: center; justify-content: center;
+				background: var(--color-bg);
+				transition: opacity 0.5s ease, visibility 0s linear 0.5s;
 			}
-			@keyframes dLoader { to { opacity:.9; transform:scale3d(.5,.5,1); } }
+			body:not(.loading) .loader { opacity: 0; visibility: hidden; }
+			.loader-word {
+				font-family: "PT Serif", Georgia, serif; font-weight: 700;
+				color: var(--color-accent);
+				font-size: clamp(2.2rem, 7vw, 4rem); letter-spacing: 0.02em;
+				opacity: 0; transform: translateY(10px);
+				transition: opacity 0.25s ease, transform 0.25s ease;
+			}
+			.loader-word.show { opacity: 1; transform: none; }
 
 			/* ===== Top bar ===== */
 			.topbar {
@@ -131,6 +139,9 @@
 		</style>
 	</head>
 	<body class="loading">
+		<!-- Loading greeting -->
+		<div class="loader" id="loader"><span class="loader-word" id="loaderWord">Hello</span></div>
+
 		<!-- ===== Top bar ===== -->
 		<div class="topbar">
 			<div class="lang-wrap">
@@ -215,6 +226,25 @@
 		<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>
 		<script>
+			/* ---------- Loading greeting cycle (pink, site font) ---------- */
+			let greetInterval = null;
+			(function () {
+				const word = document.getElementById('loaderWord');
+				if (!word) return;
+				const greetings = ["Hello!", "Ciao!", "Allô!", "Hallo!", "Cześć!", "Привет!"];
+				let i = 0;
+				word.textContent = greetings[0];
+				requestAnimationFrame(() => word.classList.add('show'));
+				greetInterval = setInterval(() => {
+					word.classList.remove('show');
+					setTimeout(() => {
+						i = (i + 1) % greetings.length;
+						word.textContent = greetings[i];
+						word.classList.add('show');
+					}, 200);
+				}, 520);
+			})();
+
 			/* ---------- Translations (my drafts — replace with your own text) ---------- */
 			const translations = {
 				en: {
@@ -290,6 +320,7 @@
 
 			/* ---------- Hero scroll + reveal ---------- */
 			window.addEventListener('load', () => {
+				if (greetInterval) clearInterval(greetInterval);
 				document.body.classList.remove('loading');
 				if (window.gsap && window.ScrollTrigger) {
 					gsap.registerPlugin(ScrollTrigger);
