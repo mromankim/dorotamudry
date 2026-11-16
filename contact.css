@@ -1,0 +1,67 @@
+/* =====================================================================
+   Slide-in CONTACT panel (top-right trigger) — Dorota Mudry site.
+   Same open/close behaviour as the Martyna menu, built robustly:
+   hidden by default via visibility (works even on old TV browsers),
+   revealed by sliding in from the right. Uses the :root vars from
+   index.html, so it stays on-theme (beige + dusty-pink hover).
+   ===================================================================== */
+
+/* Trigger button (sits in the top bar, top-right) */
+.contact-open {
+  background: transparent;
+  border: 1px solid var(--color-line);
+  border-radius: 2rem;
+  padding: 0.45rem 1.1rem;
+  color: inherit;
+  font-family: "PT Sans", sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.3s, border-color 0.3s;
+}
+.contact-open:hover { color: var(--color-accent); border-color: var(--color-accent); }
+
+/* Dimmed backdrop */
+.contact-backdrop {
+  position: fixed; inset: 0; z-index: 800;
+  background: rgba(40,34,30,0.45);
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+}
+.contact-backdrop.is-open {
+  opacity: 1; visibility: visible;
+  transition: opacity 0.4s ease;
+}
+
+/* The side panel */
+.contact-panel {
+  position: fixed; top: 0; right: 0; z-index: 810;
+  height: 100vh; width: min(420px, 86vw);
+  background: #f3ede1;
+  color: var(--color-text);
+  padding: 2.4rem 2rem;
+  display: flex; flex-direction: column; gap: 1.1rem;
+  box-shadow: -20px 0 60px rgba(40,34,30,0.15);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 0.5s cubic-bezier(0.7,0,0.2,1), visibility 0s linear 0.5s;
+}
+.contact-panel.is-open {
+  transform: translateX(0);
+  visibility: visible;
+  transition: transform 0.5s cubic-bezier(0.7,0,0.2,1);
+}
+
+.contact-close {
+  align-self: flex-end; cursor: pointer;
+  font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--color-muted); transition: color 0.3s;
+}
+.contact-close:hover { color: var(--color-accent); }
+
+.contact-panel h2 { font-size: 1.9rem; margin: 0.4rem 0 0 0; }
+.contact-panel p { color: var(--color-muted); margin: 0; }
+
+.contact-rows { display: flex; flex-direction: column; gap: 0.85rem; margin-top: 0.6rem; font-size: 1.05rem; }
+.contact-rows a { letter-spacing: 0.02em; }
+
+.contact-panel .btn { align-self: flex-start; margin-top: 1.2rem; }
