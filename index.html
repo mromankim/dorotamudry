@@ -76,6 +76,7 @@
 			/* ===== Hero scroll (reused from the original, gentler) ===== */
 			.hero-grid { display: flex; flex-direction: column; }
 			.hero-item { min-height: 92vh; display: grid; place-items: center; padding: 1rem; }
+			.hero-item.m-name { min-height: 56vh; }
 			.hero-inner { display: grid; gap: 1.2rem; place-items: center; text-align: center; }
 			.photo {
 				background-size: cover; background-position: 50% 50%;
@@ -93,7 +94,7 @@
 			}
 			.m-role {
 				margin: 0.9rem 0 0 0; font-size: clamp(0.95rem, 2.2vw, 1.25rem);
-				letter-spacing: 0.28em; text-transform: uppercase; color: var(--color-muted); font-weight: 400;
+				letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-muted); font-weight: 400; padding: 0 1rem;
 			}
 
 			/* ===== Content sections ===== */
@@ -102,10 +103,11 @@
 				font-size: clamp(1.8rem, 4vw, 2.8rem); margin: 0 0 1.5rem 0;
 				letter-spacing: 0.02em;
 			}
-			.about { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: start; }
-			.about p { font-size: 1.1rem; color: var(--color-text); margin: 0 0 1rem 0; max-width: 52ch; }
+			.about { display: flex; flex-direction: column; align-items: center; }
+			.about > div:first-child { max-width: 680px; width: 100%; }
+			.about p { font-size: 1.1rem; color: var(--color-text); margin: 0 0 1rem 0; }
 			.about-sign { font-family: "PT Serif", Georgia, serif; font-style: italic; font-size: 1.2rem !important; }
-			.about-photo { background: url(img/about.jpg) center/cover; aspect-ratio: 1.5; width: 100%; border-radius: 2px; }
+			.about-photo { background: url(img/about.jpg) center/cover; aspect-ratio: 1.5; width: 100%; max-width: 680px; margin-top: 2.5rem; border-radius: 2px; }
 
 			.services ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
 			.services li {
@@ -171,7 +173,7 @@
 				<section class="hero-item m-name">
 					<div>
 						<h1 class="m-title">Dorota Mudry</h1>
-						<p class="m-role" data-i18n="hero_role">Property Manager</p>
+						<p class="m-role" data-i18n="hero_role">Co-host and property manager</p>
 					</div>
 				</section>
 
@@ -254,7 +256,7 @@
 			const translations = {
 				en: {
 					nav_about: "About", nav_services: "Services", nav_contact: "Contact",
-					scroll: "Scroll", hero_role: "Property Manager",
+					scroll: "Scroll", hero_role: "Co-host and property manager",
 					about_h: "Hello,",
 					about_p1: "It's a pleasure to introduce myself. I'm Danuta Dorota, and for over a decade I've called beautiful Italy home — though my heart (and passport) started out in Poland; I just followed the sunshine south.",
 					about_p2: "Throughout my career I've held independent roles where I could always draw on the qualities that define me: genuine care for clients, responsibility, punctuality, attention to detail, and a feel for harmonious spaces.",
@@ -271,7 +273,7 @@
 				},
 				it: {
 					nav_about: "Chi sono", nav_services: "Servizi", nav_contact: "Contatti",
-					scroll: "Scorri", hero_role: "Amministratrice Immobiliare",
+					scroll: "Scorri", hero_role: "Co-host e property manager",
 					about_h: "Ciao,",
 					about_p1: "Ho il piacere di presentarmi. Sono Danuta Dorota e da oltre dieci anni vivo nella splendida Italia — anche se il mio cuore (e il passaporto) sono partiti dalla Polonia: ho semplicemente seguito il sole verso sud.",
 					about_p2: "In ambito professionale ho ricoperto ruoli autonomi in cui ho sempre potuto mettere a frutto le mie qualità: la cura del cliente, la responsabilità, la puntualità, l'attenzione ai dettagli e il senso dell'armonia degli spazi.",
@@ -288,7 +290,7 @@
 				},
 				pl: {
 					nav_about: "O mnie", nav_services: "Usługi", nav_contact: "Kontakt",
-					scroll: "Przewiń", hero_role: "Zarządca Nieruchomości",
+					scroll: "Przewiń", hero_role: "Co-host i property manager",
 					about_h: "Witaj,",
 					about_p1: "Mam przyjemność się przedstawić. Nazywam się Danuta Dorota, a od kilkunastu lat mieszkam w pięknej Italii — choć moje serce (i paszport) zaczęły w Polsce; po prostu podążyłam za słońcem na południe.",
 					about_p2: "W życiu zawodowym zajmowałam samodzielne stanowiska, na których zawsze mogłam wykorzystać swoje mocne strony: troskę o klienta, odpowiedzialność, punktualność, dbałość o detale i poczucie harmonii przestrzeni.",
@@ -305,7 +307,7 @@
 				},
 				ru: {
 					nav_about: "Обо мне", nav_services: "Услуги", nav_contact: "Контакты",
-					scroll: "Листайте", hero_role: "Управляющая недвижимостью",
+					scroll: "Листайте", hero_role: "Co-host и property manager",
 					about_h: "Здравствуйте,",
 					about_p1: "Рада представиться. Меня зовут Данута Дорота, и вот уже больше десяти лет я живу в прекрасной Италии — хотя моё сердце (и паспорт) родом из Польши; я просто поехала вслед за солнцем на юг.",
 					about_p2: "За свою карьеру я занимала самостоятельные должности, где всегда могла опираться на качества, которые меня определяют: искреннюю заботу о клиенте, ответственность, пунктуальность, внимание к деталям и чувство гармонии пространства.",
