@@ -44,8 +44,8 @@
 				font-family: "PT Serif", Georgia, serif; font-weight: 700;
 				color: var(--color-accent);
 				font-size: clamp(2.2rem, 7vw, 4rem); letter-spacing: 0.02em;
-				opacity: 0; transform: translateY(10px);
-				transition: opacity 0.25s ease, transform 0.25s ease;
+				opacity: 0; transform: translateY(8px);
+				transition: opacity 0.15s ease, transform 0.15s ease;
 			}
 			.loader-word.show { opacity: 1; transform: none; }
 
@@ -231,7 +231,7 @@
 			(function () {
 				const word = document.getElementById('loaderWord');
 				if (!word) return;
-				const greetings = ["Hello!", "Ciao!", "Allô!", "Hallo!", "Cześć!", "Привет!"];
+				const greetings = ["Hello!", "Ciao!", "Hallo!", "Cześć!", "Привет!"];
 				let i = 0;
 				word.textContent = greetings[0];
 				requestAnimationFrame(() => word.classList.add('show'));
@@ -241,8 +241,8 @@
 						i = (i + 1) % greetings.length;
 						word.textContent = greetings[i];
 						word.classList.add('show');
-					}, 200);
-				}, 520);
+					}, 110);
+				}, 300);
 			})();
 
 			/* ---------- Translations (my drafts — replace with your own text) ---------- */
