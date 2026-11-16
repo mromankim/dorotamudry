@@ -76,9 +76,9 @@
 			/* ===== Hero scroll (reused from the original, gentler) ===== */
 			.hero-grid { display: flex; flex-direction: column; }
 			.hero-item { min-height: 92vh; display: grid; place-items: center; padding: 1rem; }
-			.intro { min-height: 100vh; }
-			.intro-inner { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 0.9rem; padding: 1.5rem 1rem; width: 100%; }
-			.intro .photo { height: 64vh; }
+			.hero-item.m-name { min-height: 56vh; }
+
+
 			.hero-inner { display: grid; gap: 1.2rem; place-items: center; text-align: center; }
 			.photo {
 				background-size: cover; background-position: 50% 50%;
@@ -89,12 +89,13 @@
 			.photo-2 { background-image: url(img/home-2.jpg); }
 			.caption { margin: 0; font-size: 0.9rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-muted); }
 
+			.m-name { text-align: center; }
 			.m-title {
-				margin: 0; font-size: clamp(2.1rem, 6.5vw, 4rem); line-height: 0.95;
+				margin: 0; font-size: clamp(2.6rem, 9vw, 6rem); line-height: 0.95;
 				letter-spacing: 0.02em; text-transform: uppercase; will-change: transform;
 			}
 			.m-role {
-				margin: 0.8rem 0 0 0; font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+				margin: 0.9rem 0 0 0; font-size: clamp(0.95rem, 2.2vw, 1.25rem);
 				letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-muted); font-weight: 400; padding: 0 1rem;
 			}
 
@@ -139,7 +140,7 @@
 				.services ul { grid-template-columns: 1fr; }
 				.services li:nth-child(odd) { padding-right: 0.2rem; }
 				.photo { height: 62vh; }
-				.intro .photo { height: 62vh; }
+
 			}
 		</style>
 	</head>
@@ -165,10 +166,15 @@
 		<main>
 			<!-- Hero scroll: photo → name → photo -->
 			<div class="hero-grid">
-				<section class="hero-item intro photo-sec-1">
-					<div class="intro-inner">
+				<section class="hero-item photo-sec-1">
+					<div class="hero-inner">
 						<div class="photo photo-1"></div>
 						<p class="caption"><a href="#about" data-i18n="scroll">Scroll</a></p>
+					</div>
+				</section>
+
+				<section class="hero-item m-name">
+					<div>
 						<h1 class="m-title">Dorota Mudry</h1>
 						<p class="m-role" data-i18n="hero_role">Co-host and property manager</p>
 					</div>
@@ -349,10 +355,13 @@
 					const title = document.querySelector('.m-title');
 					gsap.set(p1, { transformOrigin: '50% 50%' });
 					gsap.set(p2, { transformOrigin: '50% 50%', scale: 0.9 });
-					// Photo 1 eases down slightly as you scroll past the first screen
+					// Photo 1 eases down slightly as you leave it
 					gsap.fromTo(p1, { scale: 1 }, { scale: 0.9, ease: 'none',
-						scrollTrigger: { trigger: '.intro', start: 'center center', end: 'bottom top', scrub: true } });
-					// Photo 2 enlarges in as you reach it
+						scrollTrigger: { trigger: '.photo-sec-1', start: 'center center', end: 'bottom top', scrub: true } });
+					// Name fades + scales in gently (moderate, not full-screen)
+					gsap.fromTo(title, { scale: 0.82, opacity: 0.25 }, { scale: 1, opacity: 1, ease: 'none',
+						scrollTrigger: { trigger: '.m-name', start: 'top bottom', end: 'center center', scrub: true } });
+					// Photo 2 eases in
 					gsap.fromTo(p2, { scale: 0.9 }, { scale: 1, ease: 'none',
 						scrollTrigger: { trigger: '.photo-sec-2', start: 'top bottom', end: 'center center', scrub: true } });
 				}
@@ -366,4 +375,5 @@
 		<script src="contact.js"></script>
 	</body>
 </html>
+~
 
